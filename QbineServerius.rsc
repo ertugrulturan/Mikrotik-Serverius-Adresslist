@@ -1,7 +1,4 @@
 /ip firewall address-list
-add address=# This file contains a list of all IP ranges which can be used by the Serverius WAF to contact origin servers list=QbineServerius
-add address=# Last updated: 06-04-2023 12:51 GMT+1 list=QbineServerius
-add address=# list=QbineServerius
 add address=185.8.176.64/26 list=QbineServerius
 add address=5.178.71.128/26 list=QbineServerius
 add address=79.142.70.254/32 list=QbineServerius
@@ -13,4 +10,4 @@ add address=5.255.70.64/26 list=QbineServerius
 add address=2a00:1ca8:34::/48 list=QbineServerius
 add address=2a03:3f40:35::/48 list=QbineServerius
  
-## Updated Sun Mar 10 14:26:49 UTC 2024 - LAYERWEB.COM.TR Project
+## Updated Sun Mar 10 14:30:36 UTC 2024 - LAYERWEB.COM.TR Project
