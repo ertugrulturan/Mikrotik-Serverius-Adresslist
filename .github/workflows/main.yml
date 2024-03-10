@@ -1,0 +1,47 @@
+name: Serverius IP Updater
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  update_ip_list:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GIT_EMAIL: info@layer.web.tr
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install curl
+        run: sudo apt-get install curl -y
+
+      - name: Fetch Serverius IP list
+        run: |
+          ips=$(curl -s https://my.serverius.net/serverius_public/waf-ips.txt)
+          echo "$ips" > ServeriusIPs.txt
+
+      - name: Generate RouterOS script
+        run: |
+          routeros_script="/ip firewall address-list"
+          while IFS= read -r ip; do
+            routeros_script+="\nadd address=$ip list=QbineServerius"
+          done < ServeriusIPs.txt
+          echo -e "$routeros_script" > QbineServerius.rsc
+          echo " " >> QbineServerius.rsc
+          echo "## Updated $(date) - LAYERWEB.COM.TR Project" >> QbineServerius.rsc
+
+      - name: Update Serverius Route script
+        run: |
+          cat QbineServerius.rsc > existing_Serverius_route.rsc
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "${GIT_EMAIL}"
+          git config --local user.name "ertugrulturan"
+          git add QbineServerius.rsc
+          git commit -m "Update Serverius IP list"
+          git push
