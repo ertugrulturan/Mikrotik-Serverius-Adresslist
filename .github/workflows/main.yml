@@ -21,7 +21,7 @@ jobs:
 
       - name: Fetch Serverius IP list
         run: |
-          ips=$(curl -s https://my.serverius.net/serverius_public/waf-ips.txt)
+          ips=$(curl -s https://my.serverius.net/serverius_public/waf-ips.txt | grep -v '^#')
           echo "$ips" > ServeriusIPs.txt
 
       - name: Generate RouterOS script
