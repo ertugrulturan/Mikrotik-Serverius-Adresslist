@@ -10,4 +10,4 @@ add address=5.255.70.64/26 list=QbineServerius
 add address=2a00:1ca8:34::/48 list=QbineServerius
 add address=2a03:3f40:35::/48 list=QbineServerius
  
-## Updated Sun Sep 29 02:56:14 UTC 2024 - LAYERWEB.COM.TR Project
+## Updated Sun Sep 29 03:29:56 UTC 2024 - LAYERWEB.COM.TR Project
